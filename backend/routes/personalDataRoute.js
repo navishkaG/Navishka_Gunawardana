@@ -7,6 +7,6 @@ const router = express.Router();
 // Create or Update Personal Data Route
 router.put('/', requireSignIn, createOrUpdatePersonalData);
 // Get Personal Data Route
-router.get('/', requireSignIn, getPersonalData);
+router.get('/', getPersonalData);
 
 export default router;

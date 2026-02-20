@@ -28,3 +28,24 @@ export const createEducation = async (req, res) => {
         });
     }
 };
+
+
+
+// Get All Education Entries
+export const getEducations = async (req, res) => {
+    try {
+        const educations = await Education.find().sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: educations.length,
+            data: educations
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching education entries.",
+            error: error.message
+        });
+    }
+};
