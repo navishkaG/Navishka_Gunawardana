@@ -56,3 +56,37 @@ export const getExperiences = async (req, res) => {
         });
     }
 };
+
+
+
+// Update experience
+export const updateExperience = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const updated = await Experience.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true }
+        );
+
+        if (!updated) {
+            return res.status(404).json({
+                success: false,
+                message: "Experience entry not found."
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Experience updated successfully.",
+            data: updated
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error updating experience entry.",
+            error: error.message
+        });
+    }
+};
