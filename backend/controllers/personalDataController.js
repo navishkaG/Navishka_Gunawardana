@@ -37,3 +37,30 @@ export const createOrUpdatePersonalData = async (req, res) => {
         });
     }
 };
+
+
+
+// Get Personal Data
+export const getPersonalData = async (req, res) => {
+    try {
+        const personal = await PersonalData.findOne();
+
+        if (!personal) {
+            return res.status(404).json({
+                success: false,
+                message: "Personal data not found."
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: personal
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching personal data.",
+            error: error.message
+        });
+    }
+};
