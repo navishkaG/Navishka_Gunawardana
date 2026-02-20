@@ -35,3 +35,24 @@ export const createExperience = async (req, res) => {
         });
     }
 };
+
+
+
+// Get all experience entries
+export const getExperiences = async (req, res) => {
+    try {
+        const experiences = await Experience.find().sort({ endYear: -1, startYear: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: experiences.length,
+            data: experiences,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error retrieving experiences",
+            error: error.message,
+        });
+    }
+};
