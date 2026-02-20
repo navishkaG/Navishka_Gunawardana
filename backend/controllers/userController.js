@@ -60,3 +60,54 @@ export const registerUser = async (req, res) => {
         });
     }
 }
+
+
+
+// Login
+export const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Email and Password are required."
+            });
+        }
+
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid email or password."
+            });
+        }
+
+        const isMatch = await comparePassword(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid email or password."
+            });
+        }
+
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+        res.cookie('access_token', token, {
+            httpOnly: true
+        }).status(200).json({
+            success: true,
+            message: "Logged in successfully.",
+            userId: user._id,
+            token
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            success: false,
+            message: "Internal server error."
+        });;
+    }
+};
