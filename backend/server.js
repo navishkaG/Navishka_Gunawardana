@@ -8,6 +8,7 @@ import connectDB from './config/db.js';
 
 // Import Router files
 import userRoutes from './routes/userRoute.js';
+import personalDataRoutes from './routes/personalDataRoute.js';
 
 // Configure environment
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(morgan('dev'));
 
 // Routes
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/personal-data', personalDataRoutes);
 
 const PORT = process.env.PORT;
 
