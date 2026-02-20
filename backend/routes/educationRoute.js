@@ -1,5 +1,5 @@
 import express from 'express';
-import { createEducation, getEducations, updateEducation } from '../controllers/educationController.js';
+import { createEducation, getEducations, updateEducation, deleteEducation } from '../controllers/educationController.js';
 import { requireSignIn } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -10,5 +10,7 @@ router.post('/', requireSignIn, createEducation);
 router.get('/', getEducations);
 // Update Education Route
 router.put('/:id', requireSignIn, updateEducation);
+// Delete Education Route
+router.delete('/:id', requireSignIn, deleteEducation);
 
 export default router;

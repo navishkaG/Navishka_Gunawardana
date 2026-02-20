@@ -83,3 +83,32 @@ export const updateEducation = async (req, res) => {
         });
     }
 };
+
+
+
+// Delete Education
+export const deleteEducation = async (req,res) => {
+    try {
+        const { id } = req.params;
+
+        const deleted = await Education.findByIdAndDelete(id);
+
+        if (!deleted) {
+            return res.status(404).json({
+                success: false,
+                message: "Education entry not found."
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Education deleted successfully."
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error deleting education entry.",
+            error: error.message
+        });
+    }
+}
