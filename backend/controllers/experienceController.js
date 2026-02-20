@@ -90,3 +90,32 @@ export const updateExperience = async (req, res) => {
         });
     }
 };
+
+
+
+// Delete experience
+export const deleteExperience = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const deleted = await Experience.findByIdAndDelete(id);
+
+        if (!deleted) {
+            return res.status(404).json({
+                success: false,
+                message: "Experience entry not found."
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Experience deleted successfully."
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error deleting experience entry.",
+            error: error.message
+        });
+    }
+};

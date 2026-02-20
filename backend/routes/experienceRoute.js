@@ -1,5 +1,5 @@
 import express from 'express';
-import { createExperience, getExperiences, updateExperience } from '../controllers/experienceController.js';
+import { createExperience, getExperiences, updateExperience, deleteExperience } from '../controllers/experienceController.js';
 import { requireSignIn } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -10,5 +10,7 @@ router.post('/', requireSignIn, createExperience);
 router.get('/', getExperiences);
 // Update Experience Route
 router.put('/:id', requireSignIn, updateExperience);
+// Delete Experience Route
+router.delete('/:id', requireSignIn, deleteExperience);
 
 export default router;
