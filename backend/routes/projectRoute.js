@@ -1,5 +1,5 @@
 import express from "express";
-import { createProject, getProjects, getFeaturedProjects } from "../controllers/projectController.js";
+import { createProject, getProjects, getFeaturedProjects, updateProject } from "../controllers/projectController.js";
 import { requireSignIn } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -10,5 +10,7 @@ router.post("/", requireSignIn, createProject);
 router.get("/", getProjects);
 // Get Featured Projects Route
 router.get("/featured", getFeaturedProjects);
+// Update Project Route
+router.put("/:id", requireSignIn, updateProject);
 
 export default router;

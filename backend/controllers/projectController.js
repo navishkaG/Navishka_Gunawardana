@@ -75,3 +75,37 @@ export const getFeaturedProjects = async (req, res) => {
         });
     }
 };
+
+
+
+// Update project
+export const updateProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const updated = await Project.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true }
+        );
+
+        if (!updated) {
+            return res.status(404).json({
+                success: false,
+                message: "Project not found",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Project updated successfully",
+            project: updated,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error updating project",
+            error: error.message,
+        });
+    }
+}
