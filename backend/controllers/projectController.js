@@ -54,3 +54,24 @@ export const getProjects = async (req, res) => {
         });
     }
 };
+
+
+
+// Get featured projects
+export const getFeaturedProjects = async (req, res) => {
+    try {
+        const projects = await Project.find({ featured: true }).sort({ createdAt: -1 });
+
+        res.status(200).json({
+            success: true,
+            count: projects.length,
+            projects,
+        });        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching featured projects",
+            error: error.message,
+        });
+    }
+};
