@@ -32,4 +32,25 @@ export const createProject = async (req, res) => {
             error: error.message,
         });
     }
-}
+};
+
+
+
+// Get all projects
+export const getProjects = async (req, res) => {
+    try {
+        const projects = await Project.find().sort({ createdAt: -1 });
+        
+        res.status(200).json({
+            success: true,
+            count: projects.length,
+            projects,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching projects",
+            error: error.message,
+        });
+    }
+};
