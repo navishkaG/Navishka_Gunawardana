@@ -35,3 +35,24 @@ export const createSkill = async (req, res) => {
         });
     }
 };
+
+
+
+// Get All Skills
+export const getSkills = async (req, res) => {
+    try {
+        const skills = await Skill.find().sort({ order: 1 }); // Sort by order ascending
+
+        res.status(200).json({
+            success: true,
+            count: skills.length,
+            skills
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error retrieving skills",
+            error: error.message
+        });
+    }
+};
