@@ -90,3 +90,32 @@ export const updateSkill = async (req, res) => {
         });
     }
 };
+
+
+
+// Delete Skill
+export const deleteSkill = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const deleted = await Skill.findByIdAndDelete(id);
+
+        if (!deleted) {
+            return res.status(404).json({
+                success: false,
+                message: "Skill not found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Skill deleted successfully"
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error deleting skill",
+            error: error.message
+        });
+    }
+};

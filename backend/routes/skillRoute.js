@@ -1,5 +1,5 @@
 import express from 'express';
-import { createSkill, getSkills, updateSkill } from '../controllers/skillController.js';
+import { createSkill, getSkills, updateSkill, deleteSkill } from '../controllers/skillController.js';
 import { requireSignIn } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -10,5 +10,7 @@ router.post("/", requireSignIn, createSkill);
 router.get("/", getSkills);
 // Update Skill Route
 router.put("/:id", requireSignIn, updateSkill);
+// Delete Skill Route
+router.delete("/:id", requireSignIn, deleteSkill);
 
 export default router;
