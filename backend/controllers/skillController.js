@@ -56,3 +56,37 @@ export const getSkills = async (req, res) => {
         });
     }
 };
+
+
+
+// Update Skill
+export const updateSkill = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const updated = await Skill.findByIdAndUpdate(
+            id,
+            req.body,
+            { new: true }
+        );
+
+        if (!updated) {
+            return res.status(404).json({
+                success: false,
+                message: "Skill not found"
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Skill updated successfully",
+            skill: updated
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error updating skill",
+            error: error.message
+        });
+    }
+};
