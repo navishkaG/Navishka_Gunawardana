@@ -12,6 +12,7 @@ import personalDataRoutes from './routes/personalDataRoute.js';
 import educationRoutes from './routes/educationRoute.js';
 import experienceRoutes from './routes/experienceRoute.js';
 import projectRoutes from './routes/projectRoute.js';
+import skillRoutes from './routes/skillRoute.js';
 
 // Configure environment
 dotenv.config();
@@ -32,6 +33,7 @@ app.use('/api/v1/personal-data', personalDataRoutes);
 app.use('/api/v1/education', educationRoutes);
 app.use('/api/v1/experience', experienceRoutes);
 app.use('/api/v1/project', projectRoutes);
+app.use('/api/v1/skill', skillRoutes);
 
 const PORT = process.env.PORT;
 
